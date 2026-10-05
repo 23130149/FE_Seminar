@@ -1,0 +1,128 @@
+$color-bg: #1A1B4B;
+$color-yellow: #FFD23F;
+$color-orange: #FF6B35;
+$color-cream:  #FFF8E7;
+$color-ink:    #22223B;
+$radius:12px;
+$title-size:48px;
+$title-gap:4px;
+
+*{box-sizing: border-box;}
+
+body{
+  margin:0;
+  font-family: "Segoe UI",Tahoma,sans-serif;
+  background:$color-bg;
+  color: $color-cream;
+  min-height: 100vh;
+}
+
+button{
+  font-family: inherit;
+  border:none;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+}
+ul{
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+
+.container{
+  max-width: 720px;
+  margin:0 auto;
+  padding: 16px;
+}
+#screen-menu:not(.screen-isactive),
+#screen-game:not(.screen-isactive){
+  display: none;
+}
+
+.screen {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.screen-isactive{
+  display: flex;
+  flex-direction: column;
+  gap:14px;
+}
+//level
+#level-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn-level {
+  padding: 14px 18px;
+  border-radius: $radius;
+  background: $color-yellow;
+  color: $color-ink;
+  font-weight: 700;
+  text-align: left;
+
+  &:active { transform: translateY(2px); }
+}
+
+//hud
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, .06);
+}
+.hud_time-track{
+  width:100%;
+  height: 8px;
+  border-radius: 5px;
+  background: rgba(0,0,0,.35);
+  overflow: hidden;
+}
+
+#time-fill{
+  height: 100%;
+  width: 100%;
+  background: $color-yellow;
+  transition: width .4s linear;
+}
+
+
+//model
+.model{
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  align-items: center;
+  justify-content: center;
+  & .is-open{
+    display:flex;
+  }
+}
+.model-panel{
+  background: $color-cream;
+  color: $color-ink;
+  border-radius: $radius;
+  padding: 24px;
+  max-width: 320px;
+  text-align: center;
+
+  h2{
+    margin-top: 0;
+  }
+  button{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: $radius;
+    background: $color-yellow;
+    font-weight: 700;
+  }
+}

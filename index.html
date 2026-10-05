@@ -6,11 +6,12 @@
 </head>
 <body>
 <div class="cotainer">
-        <section id ="screen-menu" class="screen-isactive">
+        <section id ="screen-menu" class="screen-isactive screen">
                 <div id="level-list"></div>
+
                 <button id="btn-how-to-play">Cách Chơi</button>
         </section>
-    <section id ="screen-game" class="game">
+    <section id ="screen-game" class="screen">
         <header class="hud">
             <button id ="btn-menu">Về Menu</button>
             <div>
@@ -18,14 +19,58 @@
                 <span id="hud-score">0</span>
             </div>
             <div>
+            <div class = "hud_time-track">
+                <div id ="time-fill"></div>
+            </div>
+                <span id ="time-text">00:00</span>
+            </div>
+
+            <div>
                 <span>Màn</span>
                 <span id="hud-level">1</span>
             </div>
             <button id="btn-pause">Tạm Dừng</button>
         </header>
 
+        <main class ="board-wrap">
+             <div id="board"></div>
+            <canvas id="connector-canvas"></canvas>
+        </main>
+
+        <footer class ="tool-bar">
+            <button id ="btn-hint">
+                Gợi Ý <span id="hint-count">0</span>
+            </button>
+
+            <button id="btn-shuffle">
+                Xáo Bài <span id="shuffle-count">0</span>
+            </button>
+        </footer>
+
 
     </section>
 </div>
+    <div id="model-howto" class="model">
+        <div class="model-panel">
+            <h2>Cách Chơi</h2>
+            <ul>
+                <li>Nội dung luật cop vào đây</li>
+            </ul>
+            <button data-close="howto">Đã Hiểu</button>
+        </div>
+    </div>
+
+    <div id="model-pause" class="model">
+        <div class="model-panel">
+            <h2>Tạm Dừng</h2>
+            <button id ="btn-resume">Tiếp Tục Chơi</button>
+            <button id="btn-restart">Chơi lại</button>
+            <button id ="btn-back-menu">Trở Về Menu</button>
+        </div>
+    </div>
+
+<script src="js/data.js"></script>
+<script src="js/game.js"></script>
 </body>
+
 </html>
