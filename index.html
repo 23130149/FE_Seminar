@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="cotainer">
-        <section id ="screen-menu" class="screen-isactive screen">
-                <div id="level-list"></div>
+    <section id="screen-menu" class="screen-isactive screen">
+        <div id="level-list"></div>
+        <button id="btn-how-to-play">Cách Chơi</button>
+    </section>
 
-                <button id="btn-how-to-play">Cách Chơi</button>
-        </section>
-    <section id ="screen-game" class="screen">
+    <section id="screen-game" class="screen">
         <header class="hud">
-            <button id ="btn-menu">Về Menu</button>
+            <button id="btn-menu">Về Menu</button>
             <div>
                 <span>Điểm</span>
                 <span id="hud-score">0</span>
             </div>
             <div>
-            <div class = "hud_time-track">
-                <div id ="time-fill"></div>
+                <div class="hud_time-track">
+                    <div id="time-fill"></div>
+                </div>
+                <span id="time-text">00:00</span>
             </div>
-                <span id ="time-text">00:00</span>
-            </div>
-
             <div>
                 <span>Màn</span>
                 <span id="hud-level">1</span>
@@ -32,45 +31,53 @@
             <button id="btn-pause">Tạm Dừng</button>
         </header>
 
-        <main class ="board-wrap">
-             <div id="board"></div>
+        <main class="board-wrap">
+            <div id="board"></div>
             <canvas id="connector-canvas"></canvas>
         </main>
 
-        <footer class ="tool-bar">
-            <button id ="btn-hint">
-                Gợi Ý <span id="hint-count">0</span>
-            </button>
-
-            <button id="btn-shuffle">
-                Xáo Bài <span id="shuffle-count">0</span>
-            </button>
+        <footer class="tool-bar">
+            <button id="btn-hint">Gợi Ý <span id="hint-count">0</span></button>
+            <button id="btn-shuffle">Xáo Bài <span id="shuffle-count">0</span></button>
         </footer>
-
-
     </section>
 </div>
-    <div id="model-howto" class="model">
-        <div class="model-panel">
-            <h2>Cách Chơi</h2>
-            <ul>
-                <li>Nội dung luật cop vào đây</li>
-            </ul>
-            <button data-close="howto">Đã Hiểu</button>
-        </div>
-    </div>
 
-    <div id="model-pause" class="model">
-        <div class="model-panel">
-            <h2>Tạm Dừng</h2>
-            <button id ="btn-resume">Tiếp Tục Chơi</button>
-            <button id="btn-restart">Chơi lại</button>
-            <button id ="btn-back-menu">Trở Về Menu</button>
-        </div>
+<div id="model-howto" class="model">
+    <div class="model-panel">
+        <h2>Cách Chơi</h2>
+        <ul>
+            <li>Chọn 2 ô có cùng hình.</li>
+            <li>Đường nối giữa 2 ô chỉ được rẽ tối đa 2 lần và không đi xuyên qua ô còn lại.</li>
+            <li>Xoá hết bàn cờ trước khi hết giờ để qua màn.</li>
+        </ul>
+        <button data-close="howto">Đã Hiểu</button>
     </div>
+</div>
+
+<div id="model-pause" class="model">
+    <div class="model-panel">
+        <h2>Tạm Dừng</h2>
+        <button id="btn-resume">Tiếp Tục Chơi</button>
+        <button id="btn-restart">Chơi lại</button>
+        <button id="btn-back-menu">Trở Về Menu</button>
+    </div>
+</div>
+
+<div id="model-result" class="model">
+    <div class="model-panel">
+        <h2 id="result-title"></h2>
+        <p id="result-desc"></p>
+        <p>Điểm: <strong id="result-score">0</strong></p>
+        <button id="btn-result-next">Màn tiếp theo</button>
+        <button id="btn-result-retry">Chơi lại</button>
+        <button id="btn-result-menu">Về Menu</button>
+    </div>
+</div>
 
 <script src="js/data.js"></script>
+<script src="js/pathfinder.js"></script>
+<script src="js/board.js"></script>
 <script src="js/game.js"></script>
 </body>
-
 </html>
