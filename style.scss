@@ -1,57 +1,49 @@
-$color-bg: #1A1B4B;
+$color-bg:     #1A1B4B;
 $color-yellow: #FFD23F;
 $color-orange: #FF6B35;
+$color-green:  #4ECB71;
 $color-cream:  #FFF8E7;
 $color-ink:    #22223B;
-$radius:12px;
-$title-size:48px;
-$title-gap:4px;
+$radius:       12px;
+$tile-size:    48px;
+$tile-gap:     4px;
 
-*{box-sizing: border-box;}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  font-family: "Segoe UI",Tahoma,sans-serif;
-  background:$color-bg;
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: $color-bg;
   color: $color-cream;
   min-height: 100vh;
 }
 
-button{
+button {
   font-family: inherit;
-  border:none;
+  border: none;
   cursor: pointer;
   background: none;
   color: inherit;
 }
-ul{
-  list-style: none;
-  padding:0;
-  margin:0;
-}
 
-.container{
-  max-width: 720px;
-  margin:0 auto;
-  padding: 16px;
-}
-#screen-menu:not(.screen-isactive),
-#screen-game:not(.screen-isactive){
-  display: none;
-}
+ul { list-style: none; padding: 0; margin: 0; }
 
-.screen {
+.cotainer {
   max-width: 720px;
   margin: 0 auto;
   padding: 16px;
 }
 
-.screen-isactive{
-  display: flex;
-  flex-direction: column;
-  gap:14px;
+#screen-menu,
+#screen-game {
+  display: none;
 }
-//level
+
+.screen {
+  flex-direction: column;
+  gap: 14px;
+}
+
 #level-list {
   display: flex;
   flex-direction: column;
@@ -70,59 +62,147 @@ ul{
   &:active { transform: translateY(2px); }
 }
 
-//hud
 .hud {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 10px 14px;
+  border-radius: $radius;
   background: rgba(255, 255, 255, .06);
+
+   div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+   div:nth-of-type(2) { flex: 1; }
+
+  button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .08);
+  }
 }
-.hud_time-track{
-  width:100%;
+
+.hud_time-track {
+  width: 100%;
   height: 8px;
   border-radius: 5px;
-  background: rgba(0,0,0,.35);
+  background: rgba(0, 0, 0, .35);
   overflow: hidden;
 }
 
-#time-fill{
+#time-fill {
   height: 100%;
   width: 100%;
   background: $color-yellow;
   transition: width .4s linear;
 }
 
+.board-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
 
-//model
-.model{
+#board {
+  position: relative;
+  display: grid;
+}
+
+#connector-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+  z-index: 2;
+}
+
+#connector-svg polyline {
+  fill: none;
+  stroke: $color-orange;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tile {
+  width: $tile-size;
+  height: $tile-size;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  border-radius: 8px;
+  background: $color-cream;
+  color: $color-ink;
+  cursor: pointer;
+  user-select: none;
+  transition: transform .15s ease, box-shadow .15s ease;
+
+  background-size: 80%;
+
+  &:hover { transform: translateY(-2px); }
+
+  &.is-selected { box-shadow: 0 0 0 3px $color-orange; }
+  &.is-hint     { box-shadow: 0 0 0 3px $color-green; }
+  &.is-empty    { visibility: hidden; pointer-events: none; }
+}
+
+.tool-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  button {
+    padding: 10px 16px;
+    border-radius: $radius;
+    background: rgba(255, 255, 255, .06);
+  }
+}
+
+.model {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  z-index: 50;
+  background: rgba(0, 0, 0, .6);
   align-items: center;
   justify-content: center;
-  & .is-open{
-    display:flex;
-  }
 }
-.model-panel{
+
+.model-panel {
+  width: 90%;
+  max-width: 320px;
+  padding: 24px;
+  border-radius: $radius;
   background: $color-cream;
   color: $color-ink;
-  border-radius: $radius;
-  padding: 24px;
-  max-width: 320px;
   text-align: center;
 
-  h2{
-    margin-top: 0;
+  h2 { margin-top: 0; }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    margin-bottom: 10px;
   }
-  button{
+
+  button {
     display: block;
     width: 100%;
     margin-top: 10px;
     padding: 12px;
     border-radius: $radius;
     background: $color-yellow;
+    color: $color-ink;
     font-weight: 700;
   }
 }

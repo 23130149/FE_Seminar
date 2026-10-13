@@ -37,7 +37,7 @@ const ICON_SET = ['assets/icon/type1.png', 'assets/icon/type2.png',
 
 
 const LEVELS=[
-    {name:'Màn 1 - Dễ'},
-    {name:'Màn 2 - Dễ'},
-    {name:'Màn 3 - Dễ'}
+    { name: 'Màn 1 - Dễ'},
+    { name: 'Màn 2 - Trung bình'},
+    { name: 'Màn 3 - Khó'}
 ];
