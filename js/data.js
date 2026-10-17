@@ -37,7 +37,8 @@ const ICON_SET = ['assets/icon/type1.png', 'assets/icon/type2.png',
 
 
 const LEVELS=[
-    { name: 'Màn 1 - Dễ'},
-    { name: 'Màn 2 - Trung bình'},
+    { name: 'Màn 1 - Dễ',     rows: 9, cols: 16,  iconTypes: 8,  timeLimit: 150, hints: 4, shuffles: 3, scorePerPair: 10 },
+    { name: 'Màn 2 - Úp thẻ', rows: 7,  cols: 10, iconTypes: 10, timeLimit: 160, hints: 6, shuffles: 3, scorePerPair: 15, faceDown: true }
+,
     { name: 'Màn 3 - Khó'}
 ];

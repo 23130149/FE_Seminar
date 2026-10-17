@@ -1,53 +1,72 @@
 const Pathfinder = (() => {
-    const DIRS = [
-        { dr: -1, dc: 0 },
-        { dr: 1,  dc: 0 },
-        { dr: 0,  dc: -1 },
-        { dr: 0,  dc: 1 }
+    const DIRECTIONS = [
+        { deltaRow: -1, deltaCol: 0 },   // lên
+        { deltaRow: 1,  deltaCol: 0 },   // xuống
+        { deltaRow: 0,  deltaCol: -1 },  // trái
+        { deltaRow: 0,  deltaCol: 1 }    // phải
     ];
-
 
     function findConnection(grid, start, end) {
         const rows = grid.length;
         const cols = grid[0].length;
 
-        const isOpen = (r, c) => {
-            if (r < -1 || r > rows || c < -1 || c > cols) return false;
-            if (r === end.r && c === end.c) return true;
-            if (r < 0 || r >= rows || c < 0 || c >= cols) return true;
-            return grid[r][c] === null;
+        const isOpen = (row, col) => {
+            if (row < -1 || row > rows || col < -1 || col > cols) return false;
+            if (row === end.row && col === end.col) return true;
+            if (row < 0 || row >= rows || col < 0 || col >= cols) return true;
+            return grid[row][col] === null;
         };
 
         const visited = new Set();
         const queue = [];
 
-        for (let d = 0; d < 4; d++) {
-            queue.push({ r: start.r, c: start.c, dir: d, turns: 0, path: [{ r: start.r, c: start.c }] });
+        for (let direction = 0; direction < 4; direction++) {
+            queue.push({
+                row: start.row,
+                col: start.col,
+                direction,
+                turns: 0,
+                path: [{ row: start.row, col: start.col }]
+            });
         }
 
         let head = 0;
         while (head < queue.length) {
-            const cur = queue[head++];
-            const nr = cur.r + DIRS[cur.dir].dr;
-            const nc = cur.c + DIRS[cur.dir].dc;
+            const current = queue[head++];
+            const { deltaRow, deltaCol } = DIRECTIONS[current.direction];
+            const nextRow = current.row + deltaRow;
+            const nextCol = current.col + deltaCol;
 
-            if (nr === end.r && nc === end.c) {
-                return [...cur.path, { r: nr, c: nc }];
+            if (nextRow === end.row && nextCol === end.col) {
+                return [...current.path, { row: nextRow, col: nextCol }];
             }
-            if (!isOpen(nr, nc)) continue;
 
-            const key = `${nr},${nc},${cur.dir},${cur.turns}`;
+            if (!isOpen(nextRow, nextCol)) continue;
+
+            const key = `${nextRow},${nextCol},${current.direction},${current.turns}`;
             if (visited.has(key)) continue;
             visited.add(key);
 
-            const newPath = [...cur.path, { r: nr, c: nc }];
+            const newPath = [...current.path, { row: nextRow, col: nextCol }];
 
-            queue.push({ r: nr, c: nc, dir: cur.dir, turns: cur.turns, path: newPath });
+            queue.push({
+                row: nextRow,
+                col: nextCol,
+                direction: current.direction,
+                turns: current.turns,
+                path: newPath
+            });
 
-            if (cur.turns < 2) {
-                for (let d = 0; d < 4; d++) {
-                    if (d === cur.dir) continue;
-                    queue.push({ r: nr, c: nc, dir: d, turns: cur.turns + 1, path: newPath });
+            if (current.turns < 2) {
+                for (let direction = 0; direction < 4; direction++) {
+                    if (direction === current.direction) continue;
+                    queue.push({
+                        row: nextRow,
+                        col: nextCol,
+                        direction,
+                        turns: current.turns + 1,
+                        path: newPath
+                    });
                 }
             }
         }
